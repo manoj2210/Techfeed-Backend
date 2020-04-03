@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Techfeed-Backend.iml" filepath="$PROJECT_DIR$/.idea/Techfeed-Backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Techfeed-Frontend/.idea/Techfeed-Frontend.iml" filepath="$PROJECT_DIR$/../Techfeed-Frontend/.idea/Techfeed-Frontend.iml" />
     </modules>
   </component>
 </project>
