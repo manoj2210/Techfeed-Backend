@@ -11,14 +11,15 @@ exports.auth=(req,res,next)=>{
     }
     verifyJWTToken(token)
         .then(user => {
-            req.body.userName = user.userName;
-            req.body.isStudent=user.isStudent;
+            req.body.studentDetails = user.studentDetails;
+            req.body.isStudent= user.isStudent;
             next();
         }).catch((err) => {
             if(!refresh) {
                 res.status(401).send(errors.unAuthorised(err));
             }
             else{
+                console.log(err);
                 verifyRefreshToken(refresh)
                     .then((r)=>{
                         delete refreshTokenList[refresh];
@@ -43,7 +44,7 @@ function verifyJWTToken(token) {
             if (err) {
                 return reject(err.message);
             }   // Check the decoded user
-            if (!decodedToken || !decodedToken.userName) {
+            if (!decodedToken || !decodedToken.isStudent) {
                 return reject('Token is invalid');
             }   resolve(decodedToken);
         })
@@ -58,13 +59,11 @@ function verifyRefreshToken(token) {
                 return reject(err.message);
             }
             if(token in refreshTokenList){
-                if(refreshTokenList[token].userName) {
-                    if (refreshTokenList[token].isStudent) {
-                        resolve(await jwtService.getAccessTokenStudent(refreshTokenList[token].userName, refreshTokenList[token].password));
-                    }
-                    else{
-                        resolve(await jwtService.getAccessTokenTeacher(refreshTokenList[token].userName, refreshTokenList[token].password),refreshTokenList[token].emailID);
-                    }
+                if (refreshTokenList[token].isStudent) {
+                    resolve(await jwtService.getAccessTokenStudent(refreshTokenList[token].userName, refreshTokenList[token].password,refreshTokenList[token].collegeName));
+                }
+                else{
+                    resolve(await jwtService.getAccessTokenTeacher(refreshTokenList[token].userName, refreshTokenList[token].password),refreshTokenList[token].emailID,refreshTokenList[token].collegeName);
                 }
                 return reject('RefreshToken not in DB')
             }

@@ -2,6 +2,7 @@ require('dotenv').config();
 const config=require('./internal/config');
 const service=require('./internal/services/auth');
 const connection=config();
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
 
@@ -31,10 +32,12 @@ const baseGetRouter=require('./internal/routers/getBaseData');
 const baseAddRouter=require('./internal/routers/addBaseData');
 const loginRouter=require('./internal/routers/login');
 const middleware=require('./internal/middleware/auth');
+app.use(cors({credentials: true, origin: true}));
 app.use('/oauth/token',loginRouter);
 app.use('/signUp',signUpRouter);
-app.use('/base',baseGetRouter);
+
 app.use(middleware.auth);
+app.use('/base',baseGetRouter);
 app.use('/base',baseAddRouter);
 
 app.listen(8080);

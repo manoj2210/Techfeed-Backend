@@ -20,7 +20,7 @@ exports.getColleges= function (){
 };
 
 exports.getDepartments=function (college) {
-    return db.query(`select Department.Name from College inner join Department where College.Name='${college}';`)
+    return db.query(`select d.Name from College as c inner join Department as d on c.Name= d.ColName where c.Name='${college}';`)
         .then(rows=>{
             return rows;
         },err => {
@@ -32,7 +32,7 @@ exports.getDepartments=function (college) {
 };
 
 exports.getClasses=function (college,department) {
-    return db.query(`select Class.Name from College inner join Department inner join Class where College.Name='${college}' and Department.Name='${department}';`)
+    return db.query(`select c.Name from Class as c inner join Department as d on c.depName= d.Name and d.colName=c.colName where c.colName='${college}' and c.depName='${department}';`)
         .then(rows=>{
             return rows;
         },err => {

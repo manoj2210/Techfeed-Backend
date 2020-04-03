@@ -1,7 +1,7 @@
 const createTables=[
     'Create table College(Name varchar(50),City varchar(25),State varchar(25),PRIMARY KEY (Name));',
-    'Create table Department(Name varchar(50),ColName varchar(50),PRIMARY KEY (Name),FOREIGN KEY (ColName) REFERENCES College(Name));',
-    'Create table Class(Name varchar(50),DepName varchar(50),Timetable varchar(300),PRIMARY KEY (Name),FOREIGN KEY (DepName) REFERENCES Department(Name));',
+    'Create table Department(Name varchar(50),ColName varchar(50),PRIMARY KEY (Name,ColName),FOREIGN KEY (ColName) REFERENCES College(Name));',
+    'Create table Class(Name varchar(50),ColName varchar(50),DepName varchar(50),Timetable varchar(300),PRIMARY KEY (Name,DepName,ColName),FOREIGN KEY (DepName) REFERENCES Department(Name),FOREIGN KEY (ColName) REFERENCES Department(ColName));',
     'Create table Course(CID varchar(10),Name varchar(50),PRIMARY KEY (CId));',
     'Create table Students(RollNo varchar(10),Name varchar(50),MobileNo varchar(15),IsRep bool,EmailId varchar(50),ClassName varchar(50),FOREIGN KEY (ClassName) REFERENCES Class(Name),PRIMARY KEY (RollNo));',
     'Create table Studies(RollNo varchar(10),CID varchar(10),FOREIGN KEY (RollNo) REFERENCES Students(RollNo),FOREIGN KEY (CID) REFERENCES Course(CID),primary key(cid,rollNo));',

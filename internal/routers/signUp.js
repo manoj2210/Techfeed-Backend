@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const signUpControllerInsert=require('../controllers/insertTable');
+const signUpControllerInsert=require('../controllers/signUp');
 
-router.post('/addStudent',signUpControllerInsert.addStudent);
-router.post('/addTeacher',signUpControllerInsert.addTeacher);
-
-
+router.post('/addStudent',signUpControllerInsert.signUpStudent);
+router.post('/addTeacher',signUpControllerInsert.signUpTeacher);
 
 module.exports = router;

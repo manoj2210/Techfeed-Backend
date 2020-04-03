@@ -8,8 +8,8 @@ let errorTemplate=(c,e,m)=>{
     }
 };
 
-let checkLoginStudent=(userName,password)=>{
-     return db.query(`Select Password from AuthStudent where RollNo='${userName}';`)
+let checkLoginStudent=(userName,password,collegeName)=>{
+     return db.query(`Select Password from AuthStudent where RollNo='${userName}' and ColName='${collegeName}';`)
         .then(rows=>{
             if(rows[0])
                 return password === rows[0].Password;
@@ -23,8 +23,22 @@ let checkLoginStudent=(userName,password)=>{
         });
 };
 
-exports.getAccessTokenStudent=async (userName,password)=>{
-    let res=await checkLoginStudent(userName,password);
+let getStudentData=(userName,collegeName)=>{
+    return db.query(`Select Password from Student where RollNo='${userName}' and ColName='${collegeName}';`)
+        .then(rows=>{
+            if(rows[0])
+                return rows[0];
+            else
+                return errorTemplate(404,404,"No such User");
+        },err => {
+            return errorTemplate(err.code,err.errno,err.sqlMessage);
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+};
+exports.getAccessTokenStudent=async (userName,password,collegeName)=>{
+    let res=await checkLoginStudent(userName,password,collegeName);
     if(res === false){
         return errorTemplate(401,401,"Invalid Password");
     }
@@ -32,9 +46,10 @@ exports.getAccessTokenStudent=async (userName,password)=>{
         return res;
     }
     else{
+        let details=await getStudentData(userName,collegeName);
         let user={
             "isStudent":true,
-            "userName":userName,
+            "studentDetails":details
         };
         const token = jwt.sign(user, process.env.accessTokenSecret, { expiresIn: process.env.accessTokenLife});
         const refreshToken = jwt.sign(user, process.env.refreshTokenSecret, { expiresIn: process.env.refreshTokenLife});
@@ -48,16 +63,16 @@ exports.getAccessTokenStudent=async (userName,password)=>{
         refreshTokenList[refreshToken]={
           "isStudent":true,
           "userName":userName,
-          "password":password
+          "password":password,
+          "collegeName":collegeName
         };
-
         return response;
     }
 };
 
 
-let checkLoginTeacher=(userName,password,emailID)=>{
-    return db.query(`Select Password from AuthTeacher where name='${userName}' and emailID='${emailID}';`)
+let checkLoginTeacher=(userName,password,emailID,collegeName)=>{
+    return db.query(`Select Password from AuthTeacher where name='${userName}' and emailID='${emailID}' and ColName='${collegeName}';`)
         .then(rows=>{
             if(rows[0])
                 return password === rows[0].Password;
@@ -71,8 +86,8 @@ let checkLoginTeacher=(userName,password,emailID)=>{
         });
 };
 
-exports.getAccessTokenTeacher=async (userName,password,emailID)=>{
-    let res=await checkLoginTeacher(userName,password,emailID);
+exports.getAccessTokenTeacher=async (userName,password,emailID,collegeName)=>{
+    let res=await checkLoginTeacher(userName,password,emailID,collegeName);
     if(res === false){
         return errorTemplate(401,401,"Invalid Password");
     }
@@ -83,6 +98,7 @@ exports.getAccessTokenTeacher=async (userName,password,emailID)=>{
         let user={
             "userName":userName,
             "emailID":emailID,
+            "collegeName":collegeName,
             "isStudent":false,
         };
         const token = jwt.sign(user, process.env.accessTokenSecret, { expiresIn: process.env.accessTokenLife});
@@ -98,7 +114,8 @@ exports.getAccessTokenTeacher=async (userName,password,emailID)=>{
             "isStudent":false,
             "userName":userName,
             "password":password,
-            "emailID":emailID
+            "emailID":emailID,
+            "collegeName":collegeName,
         };
 
         return response;

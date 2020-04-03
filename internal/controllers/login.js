@@ -3,12 +3,12 @@ const services=require('../services/auth');
 const errors=require('../errors');
 
 exports.loginStudent=(req,res)=>{
-    if(!req.body.rollNo || !req.body.password){
+    if(!req.body.rollNo || !req.body.password || !req.body.collegeName){
         res.status(httpStatus.BAD_REQUEST);
         res.send(errors.badRequest("Some entries are empty!!"));
         return
     }
-    services.getAccessTokenStudent(req.body.rollNo,req.body.password)
+    services.getAccessTokenStudent(req.body.rollNo,req.body.password,req.body.collegeName)
         .then(r=>{
             if(r.errno){
                 if(r.errno===401){
@@ -25,12 +25,12 @@ exports.loginStudent=(req,res)=>{
 };
 
 exports.loginTeacher=(req,res)=>{
-    if(!req.body.userName || !req.body.password || !req.body.emailID){
+    if(!req.body.userName || !req.body.password || !req.body.emailID|| !req.body.collegeName){
         res.status(httpStatus.BAD_REQUEST);
         res.send(errors.badRequest("Some entries are empty!!"));
         return
     }
-    services.getAccessTokenTeacher(req.body.userName,req.body.password,req.body.emailID)
+    services.getAccessTokenTeacher(req.body.userName,req.body.password,req.body.emailID,req.body.collegeName)
         .then(r=>{
             if(r.errno){
                 if(r.errno===401){

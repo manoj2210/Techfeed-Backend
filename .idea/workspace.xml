@@ -2,27 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7042a61a-bbe9-4df1-9e4c-4cf24ff4f6cf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/controllers/getSignUpData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/controllers/insertTable.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/controllers/login.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/errors/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/middleware/auth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/models/createTable.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/routers/addBaseData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/routers/getBaseData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/routers/login.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/services/auth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/services/getSignUpData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/services/insertQueries.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Techfeed-Backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Techfeed-Backend.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/controllers/signUp.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/config/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/internal/config/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/controllers/insertTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/internal/controllers/insertTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/controllers/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/internal/controllers/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/middleware/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/internal/middleware/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/models/createTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/internal/models/createTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/routers/addBaseData.js" beforeDir="false" afterPath="$PROJECT_DIR$/internal/routers/addBaseData.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/routers/signUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/internal/routers/signUp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/services/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/internal/services/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/services/getSignUpData.js" beforeDir="false" afterPath="$PROJECT_DIR$/internal/services/getSignUpData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/services/insertQueries.js" beforeDir="false" afterPath="$PROJECT_DIR$/internal/services/insertQueries.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
@@ -37,6 +28,8 @@
       <change beforePath="$PROJECT_DIR$/../Techfeed-Frontend/.next/static/runtime/webpack.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Techfeed-Frontend/.next/static/runtime/webpack.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Techfeed-Frontend/.next/static/runtime/webpack.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/../Techfeed-Frontend/.next/static/runtime/webpack.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Techfeed-Frontend/.next/static/webpack/becd304d725946b514a2.hot-update.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Techfeed-Frontend/.next/static/webpack/becd304d725946b514a2.hot-update.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Techfeed-Frontend/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Techfeed-Frontend/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Techfeed-Frontend/services/rest_service.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Techfeed-Frontend/services/rest_service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Techfeed-Frontend/src/components/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Techfeed-Frontend/src/components/layout.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Techfeed-Frontend/src/pages/TechFeed.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Techfeed-Frontend/src/pages/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Techfeed-Frontend/src/pages/login.js" afterDir="false" />
@@ -56,7 +49,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../Techfeed-Frontend" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1ZeWnfjiViXhjsxZ1Hx8xwg3GhN" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -147,7 +140,7 @@
       <workItem from="1585385509426" duration="6472000" />
       <workItem from="1585392727190" duration="12254000" />
       <workItem from="1585727575575" duration="6225000" />
-      <workItem from="1585844653597" duration="21635000" />
+      <workItem from="1585844653597" duration="35219000" />
     </task>
     <servers />
   </component>
@@ -179,9 +172,13 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="1419" height="226" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1585854131985" />
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1585850699597">
+    <state x="375" y="72" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1585946276712">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1585850699597" />
+    <state x="375" y="72" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1440.900@0.0.1440.900" timestamp="1585946276712" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1585931200883">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1585931200883" />
   </component>
 </project>
