@@ -7,6 +7,7 @@ let errorTemplate=(c,e,m)=>{
     }
 };
 
+
 exports.insertCollege= function (n,d,s){
     return db.query(`INSERT INTO College (\`Name\`, \`City\`, \`State\`) VALUES ('${n}', '${d}', '${s}');`)
     .then(rows=>{

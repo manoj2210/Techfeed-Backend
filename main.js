@@ -32,12 +32,17 @@ const baseGetRouter=require('./internal/routers/getBaseData');
 const baseAddRouter=require('./internal/routers/addBaseData');
 const loginRouter=require('./internal/routers/login');
 const middleware=require('./internal/middleware/auth');
+const updateRouter=require('./internal/routers/updatesRouter');
+const getDataRouter=require('./internal/routers/getDataRouter');
 app.use(cors({credentials: true, origin: true}));
 app.use('/oauth/token',loginRouter);
 app.use('/signUp',signUpRouter);
+app.use('/base',baseGetRouter);
 
 app.use(middleware.auth);
-app.use('/base',baseGetRouter);
 app.use('/base',baseAddRouter);
+app.use('/getData',getDataRouter);
+app.use('/update',updateRouter);
+
 
 app.listen(8080);

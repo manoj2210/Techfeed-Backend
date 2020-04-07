@@ -1,4 +1,5 @@
 const jwt=require('jsonwebtoken');
+const getStudentData=require('./getData').getStudentData;
 
 let errorTemplate=(c,e,m)=>{
     return {
@@ -23,20 +24,7 @@ let checkLoginStudent=(userName,password,collegeName)=>{
         });
 };
 
-let getStudentData=(userName,collegeName)=>{
-    return db.query(`Select Password from Student where RollNo='${userName}' and ColName='${collegeName}';`)
-        .then(rows=>{
-            if(rows[0])
-                return rows[0];
-            else
-                return errorTemplate(404,404,"No such User");
-        },err => {
-            return errorTemplate(err.code,err.errno,err.sqlMessage);
-        })
-        .catch(err=>{
-            console.log(err);
-        });
-};
+
 exports.getAccessTokenStudent=async (userName,password,collegeName)=>{
     let res=await checkLoginStudent(userName,password,collegeName);
     if(res === false){
