@@ -3,6 +3,6 @@ const router = express.Router();
 
 const getDataController=require('../controllers/getDataController');
 
-router.get('/student',getDataController.getStudentData);
+router.get('/userDetails',getDataController.getUserData);
 
 module.exports = router;

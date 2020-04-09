@@ -11,8 +11,9 @@ exports.auth=(req,res,next)=>{
     }
     verifyJWTToken(token)
         .then(user => {
-            req.body.studentDetails = user.studentDetails;
+            // console.log(user);
             req.body.isStudent= user.isStudent;
+            req.body.details = user.details;
             next();
         }).catch((err) => {
             if(!refresh) {
@@ -44,7 +45,7 @@ function verifyJWTToken(token) {
             if (err) {
                 return reject(err.message);
             }   // Check the decoded user
-            if (!decodedToken || !decodedToken.isStudent) {
+            if (!decodedToken ) {
                 return reject('Token is invalid');
             }   resolve(decodedToken);
         })
@@ -63,7 +64,7 @@ function verifyRefreshToken(token) {
                     resolve(await jwtService.getAccessTokenStudent(refreshTokenList[token].userName, refreshTokenList[token].password,refreshTokenList[token].collegeName));
                 }
                 else{
-                    resolve(await jwtService.getAccessTokenTeacher(refreshTokenList[token].userName, refreshTokenList[token].password),refreshTokenList[token].emailID,refreshTokenList[token].collegeName);
+                    resolve(await jwtService.getAccessTokenTeacher(refreshTokenList[token].password),refreshTokenList[token].emailID,refreshTokenList[token].collegeName);
                 }
                 return reject('RefreshToken not in DB')
             }

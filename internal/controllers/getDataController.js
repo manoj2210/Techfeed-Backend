@@ -1,5 +1,5 @@
 
-exports.getStudentData=function (req,res) {
+exports.getUserData=function (req,res) {
     res.status(200);
-    res.send(req.body.studentDetails);
+    res.send({'isStudent':req.body.isStudent,'details':req.body.details});
 };

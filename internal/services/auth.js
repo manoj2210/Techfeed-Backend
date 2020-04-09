@@ -1,5 +1,6 @@
 const jwt=require('jsonwebtoken');
 const getStudentData=require('./getData').getStudentData;
+const getTeacherData=require('./getData').getTeacherData;
 
 let errorTemplate=(c,e,m)=>{
     return {
@@ -37,7 +38,7 @@ exports.getAccessTokenStudent=async (userName,password,collegeName)=>{
         let details=await getStudentData(userName,collegeName);
         let user={
             "isStudent":true,
-            "studentDetails":details
+            "details":details
         };
         const token = jwt.sign(user, process.env.accessTokenSecret, { expiresIn: process.env.accessTokenLife});
         const refreshToken = jwt.sign(user, process.env.refreshTokenSecret, { expiresIn: process.env.refreshTokenLife});
@@ -59,8 +60,8 @@ exports.getAccessTokenStudent=async (userName,password,collegeName)=>{
 };
 
 
-let checkLoginTeacher=(userName,password,emailID,collegeName)=>{
-    return db.query(`Select Password from AuthTeacher where name='${userName}' and emailID='${emailID}' and ColName='${collegeName}';`)
+let checkLoginTeacher=(password,emailID,collegeName)=>{
+    return db.query(`Select Password from AuthTeacher where  emailID='${emailID}' and ColName='${collegeName}';`)
         .then(rows=>{
             if(rows[0])
                 return password === rows[0].Password;
@@ -74,8 +75,8 @@ let checkLoginTeacher=(userName,password,emailID,collegeName)=>{
         });
 };
 
-exports.getAccessTokenTeacher=async (userName,password,emailID,collegeName)=>{
-    let res=await checkLoginTeacher(userName,password,emailID,collegeName);
+exports.getAccessTokenTeacher=async (password,emailID,collegeName)=>{
+    let res=await checkLoginTeacher(password,emailID,collegeName);
     if(res === false){
         return errorTemplate(401,401,"Invalid Password");
     }
@@ -83,10 +84,9 @@ exports.getAccessTokenTeacher=async (userName,password,emailID,collegeName)=>{
         return res;
     }
     else{
+        let details=await getTeacherData(emailID,collegeName);
         let user={
-            "userName":userName,
-            "emailID":emailID,
-            "collegeName":collegeName,
+            "details":details,
             "isStudent":false,
         };
         const token = jwt.sign(user, process.env.accessTokenSecret, { expiresIn: process.env.accessTokenLife});
@@ -100,7 +100,6 @@ exports.getAccessTokenTeacher=async (userName,password,emailID,collegeName)=>{
 
         refreshTokenList[refreshToken]={
             "isStudent":false,
-            "userName":userName,
             "password":password,
             "emailID":emailID,
             "collegeName":collegeName,

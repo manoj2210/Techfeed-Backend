@@ -56,7 +56,7 @@ exports.signUpTeacher=function (req,res) {
     services.insertTeacher(req.body.name,req.body.mobileNo,req.body.emailID,req.body.collegeName)
         .then(r=>{
             if(r===201){
-                services.insertAuthTeacher(req.body.name,req.body.password,req.body.emailID,req.body.collegeName)
+                services.insertAuthTeacher(req.body.emailID,req.body.password,req.body.collegeName)
                     .then(r=>{
                         if(r===201){
                             res.status(httpStatus.CREATED);

@@ -19,3 +19,18 @@ exports.getStudentData=(userName,collegeName)=>{
             console.log(err);
         });
 };
+
+exports.getTeacherData=(emailId,collegeName)=>{
+    return db.query(`Select  Name as name,MobileNo as contactNo,EmailId as emailID,ColName as college from Teachers where EmailId='${emailId}' and ColName='${collegeName}';`)
+        .then(rows=>{
+            if(rows[0])
+                return rows[0];
+            else
+                return errorTemplate(404,404,"No such User");
+        },err => {
+            return errorTemplate(err.code,err.errno,err.sqlMessage);
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+};

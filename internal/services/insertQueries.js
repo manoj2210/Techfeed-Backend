@@ -68,8 +68,8 @@ exports.insertAuthStudent=function (r,p,col) {
         });
 };
 
-exports.insertAuthTeacher=function (n,e,p,c) {
-    return db.query(`INSERT INTO \`AuthTeacher\` (\`Name\`, \`Password\`, \`EmailId\`,\`ColName\`) VALUES ('${n}', '${p}', '${e}','${c}');`)
+exports.insertAuthTeacher=function (e,p,c) {
+    return db.query(`INSERT INTO AuthTeacher (Password, EmailId,ColName) VALUES ('${p}', '${e}','${c}');`)
         .then(rows=>{
             return 201;
         },err => {
@@ -81,7 +81,7 @@ exports.insertAuthTeacher=function (n,e,p,c) {
 };
 
 exports.insertTeacher=function (n,m,e,c) {
-    return db.query(`INSERT INTO \`Teachers\` (\`Name\`, \`MobileNo\`, \`EmailId\`,\`ColName\`) VALUES ('${n}', '${m}', '${e}','${c}');`)
+    return db.query(`INSERT INTO Teachers (Name,MobileNo, EmailId,ColName) VALUES ('${n}', '${m}', '${e}','${c}');`)
         .then(rows=>{
             return 201;
         },err => {

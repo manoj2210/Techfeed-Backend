@@ -11,13 +11,13 @@ exports.updateStudentData=function (req,res) {
         res.send(errors.badRequest("Some entries are empty!!"));
         return
     }
-    services.updateStudent(req.body.studentDetails.rollNo,req.body.studentDetails.college,req.body.name ,req.body.contactNo ,req.body.emailID ,req.body.github || '',req.body.linkedIn || '',req.body.instaGram || '')
+    services.updateStudent(req.body.details.rollNo,req.body.details.college,req.body.name ,req.body.contactNo ,req.body.emailID ,req.body.github || '',req.body.linkedIn || '',req.body.instaGram || '')
         .then(async (r)=>{
             if(r===212){
-                let details=await getStudentData(req.body.studentDetails.rollNo,req.body.studentDetails.college);
+                let details=await getStudentData(req.body.details.rollNo,req.body.details.college);
                 let user={
                     "isStudent":true,
-                    "studentDetails": details
+                    "details": details
                 };
                 const token = jwt.sign(user, process.env.accessTokenSecret, { expiresIn: process.env.accessTokenLife});
                 res.status(212);
