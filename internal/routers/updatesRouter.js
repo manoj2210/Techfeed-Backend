@@ -3,6 +3,6 @@ const router = express.Router();
 
 const updateController=require('../controllers/updatesController');
 
-router.post('/userDetails',updateController.updateStudentData);
+router.post('/userDetails',updateController.updateUserDetails);
 
 module.exports = router;

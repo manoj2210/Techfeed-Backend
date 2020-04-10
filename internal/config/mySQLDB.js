@@ -9,6 +9,7 @@ const config={
 class Database {
     constructor( config ) {
         this.connection = mysql.createConnection( config );
+        console.log("Connected Succesfully to SQL server");
     }
     query( sql, args ) {
         return new Promise( ( resolve, reject ) => {

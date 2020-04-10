@@ -16,3 +16,15 @@ exports.updateStudent= function (rollNo,col,name,mobile,email,github,linkedin,in
             console.log(err);
         });
 };
+
+exports.updateStudent= function (email,col,name,mobile){
+    return db.query(`UPDATE Teachers SET  Name = '${name}', MobileNo = '${mobile}' WHERE (EmailId = '${email}') and (ColName = '${col}');`)
+        .then(rows=>{
+            return 212;
+        },err => {
+            return errorTemplate(err.code,err.errno,err.sqlMessage);
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+};

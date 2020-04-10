@@ -34,3 +34,18 @@ exports.getTeacherData=(emailId,collegeName)=>{
             console.log(err);
         });
 };
+
+exports.getTimeTableStudent=(name,depName,colName)=>{
+    return db.query(`Select Timetable as t from Class where Name='${name}' and ColName='${colName}' and DepName='${depName}';`)
+        .then(rows=>{
+            if(rows[0])
+                return {'link':rows[0].t};
+            else
+                return errorTemplate(404,404,"No such Class");
+        },err => {
+            return errorTemplate(err.code,err.errno,err.sqlMessage);
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+};

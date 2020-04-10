@@ -48,15 +48,15 @@ exports.signUpStudent=function (req,res) {
 };
 
 exports.signUpTeacher=function (req,res) {
-    if(!req.body.name || !req.body.mobileNo || !req.body.emailID || !req.body.collegeName ||!req.body.password){
+    if(!req.body.name || !req.body.contactNo || !req.body.emailID || !req.body.college ||!req.body.password){
         res.status(httpStatus.BAD_REQUEST);
         res.send(errors.badRequest("Some entries are empty!!"));
         return
     }
-    services.insertTeacher(req.body.name,req.body.mobileNo,req.body.emailID,req.body.collegeName)
+    services.insertTeacher(req.body.name,req.body.contactNo,req.body.emailID,req.body.college)
         .then(r=>{
             if(r===201){
-                services.insertAuthTeacher(req.body.emailID,req.body.password,req.body.collegeName)
+                services.insertAuthTeacher(req.body.emailID,req.body.password,req.body.college)
                     .then(r=>{
                         if(r===201){
                             res.status(httpStatus.CREATED);

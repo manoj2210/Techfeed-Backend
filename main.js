@@ -1,48 +1,26 @@
 require('dotenv').config();
-const config=require('./internal/config');
-const service=require('./internal/services/auth');
-const connection=config();
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const cookieParser = require("cookie-parser");
+
+//SQL
+
+const SQLConfig=require('./internal/config/mySQLDB');
+const connection=SQLConfig();
 
 global.db=connection;
 global.refreshTokenList={};
 
-// console.log(service.getAccessTokenStudent('18pt21','kavithammk'));
-// db.query('SELECT MMk from exams')
-// service.insertDepartment('mmk','KK').then(x=>console.log(x));
-//     .then(rows=>{
-//         console.log(rows);
-//     },err => {
-//         return db.close().then( () => { throw err; } )
-//     })
-//     .catch(err=>{
-//         console.log(err);
-//     });
-
-
+// Express
 const express = require('express');
-const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(cookieParser());
-const signUpRouter=require('./internal/routers/signUp');
-const baseGetRouter=require('./internal/routers/getBaseData');
-const baseAddRouter=require('./internal/routers/addBaseData');
-const loginRouter=require('./internal/routers/login');
-const middleware=require('./internal/middleware/auth');
-const updateRouter=require('./internal/routers/updatesRouter');
-const getDataRouter=require('./internal/routers/getDataRouter');
-app.use(cors({credentials: true, origin: true}));
-app.use('/oauth/token',loginRouter);
-app.use('/signUp',signUpRouter);
-app.use('/base',baseGetRouter);
+const urlMaps=require('./internal/urlmaps');
 
-app.use(middleware.auth);
-app.use('/base',baseAddRouter);
-app.use('/getData',getDataRouter);
-app.use('/update',updateRouter);
+// Mongo
+const MongoClient = require('mongodb').MongoClient;
+const url = "mongodb://localhost:27017";
+const dbName = process.env.mongoDB;
+MongoClient.connect(url, { useUnifiedTopology: true })
+    .then(client => {
+        console.log('Connected to Mongo Database');
+        global.mongoDB=client.db(dbName);
 
-
-app.listen(8080);
+        const app = express();
+        urlMaps(app);
+    });
