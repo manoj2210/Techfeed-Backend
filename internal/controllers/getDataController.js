@@ -1,4 +1,5 @@
 const getTtStudentService=require('../services/getData').getTimeTableStudent;
+const getStudentCourses=require('../services/getData').getCoursesStudent;
 const httpStatus = require('http-status-codes');
 const errors=require('../errors');
 
@@ -33,5 +34,25 @@ exports.getTimeTableStudent=function (req,res) {
                 res.status(httpStatus.CONFLICT);
                 res.send(errors.unknownError(r.sqlMessage,r.errno));
             }
-        });;
+        });
+};
+
+exports.getCoursesStudent=function (req,res) {
+    getStudentCourses(req.body.details.class,req.body.details.department,req.body.details.college)
+        .then(r=>{
+            if(!r.code){
+                if(r.length>0) {
+                    res.status(httpStatus.OK);
+                    res.send(r);
+                }
+                else{
+                    res.status(httpStatus.NOT_FOUND);
+                    res.send(errors.noDataFound("No Courses are available"));
+                }
+            }
+            else {
+                res.status(httpStatus.CONFLICT);
+                res.send(errors.unknownError(r.sqlMessage,r.errno));
+            }
+        });
 };

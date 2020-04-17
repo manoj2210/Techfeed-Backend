@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 //SQL
-
 const SQLConfig=require('./internal/config/mySQLDB');
 const connection=SQLConfig();
 

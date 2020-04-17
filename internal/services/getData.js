@@ -49,3 +49,48 @@ exports.getTimeTableStudent=(name,depName,colName)=>{
             console.log(err);
         });
 };
+
+exports.getCoursesStudent=(name,depName,colName)=>{
+    return db.query(`Select cid, name from Course where ClassName='${name}' and ColName='${colName}' and DepName='${depName}';`)
+        .then(rows=>{
+            if(rows)
+                return rows;
+            else
+                return errorTemplate(404,404,"No Courses available for the class");
+        },err => {
+            return errorTemplate(err.code,err.errno,err.sqlMessage);
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+};
+
+exports.getChaptersStudent=(cid,colName)=>{
+    return db.query(`Select number, name from Chapters where CID='${cid}' and ColName='${colName}';`)
+        .then(rows=>{
+            if(rows)
+                return rows;
+            else
+                return errorTemplate(404,404,"No Courses available for the class");
+        },err => {
+            return errorTemplate(err.code,err.errno,err.sqlMessage);
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+};
+
+exports.getMaterialsStudent=(cid,colName,chapName)=>{
+    return db.query(`Select matName, link from Chapters where ChapterName='${chapName}' CID='${cid}' and ColName='${colName}';`)
+        .then(rows=>{
+            if(rows)
+                return rows;
+            else
+                return errorTemplate(404,404,"No Courses available for the class");
+        },err => {
+            return errorTemplate(err.code,err.errno,err.sqlMessage);
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+};
