@@ -1,5 +1,6 @@
 const httpStatus = require('http-status-codes');
 const services=require('../services/insertQueries');
+const getData =require('../services/getData');
 const errors=require('../errors');
 
 exports.addCollege=function (req,res) {
@@ -112,6 +113,8 @@ exports.addStudent=function (req,res) {
         });
 };
 
+
+
 // exports.addStudies=function (req,res) {
 //     if(!req.body.cid || !req.body.rollNo ){
 //         res.status(httpStatus.BAD_REQUEST);
@@ -166,6 +169,50 @@ exports.addTeacher=function (req,res) {
         });
 };
 
+exports.addAnnouncement=function (req,res) {
+    if(!req.body.title || !req.body.announcement || !req.body.cid ){
+        res.status(httpStatus.BAD_REQUEST);
+        res.send(errors.badRequest("Some entries are empty!!"));
+        return
+    }
+    getData.getClassGivenCourse(req.body.cid,req.body.details.college)
+        .then(r=>{
+            // console.log(r);
+            if(!r.code){
+                if(r.length>0) {
+                    let announcement={title:req.body.title,announcement:req.body.announcement,time: new Date()};
+                    services.insertAnnouncement(req.body.details.name,req.body.details.emailID,req.body.details.college,announcement,r[0].className,r[0].depName)
+                        .then(re=>{
+                            if(re === 201){
+                                res.status(httpStatus.CREATED);
+                                res.send({status:'Success'});
+                            }
+                            else {
+                                if (re.errno === 1062) {
+                                    res.status(httpStatus.CONFLICT);
+                                    res.send(errors.duplicateEntry(r.sqlMessage));
+                                }
+                                else {
+                                    res.status(httpStatus.CONFLICT);
+                                    res.send(errors.unknownError(r.sqlMessage,r.errno));
+                                }
+                            }
+                        });
+                }
+                else{
+                    res.status(httpStatus.NOT_FOUND);
+                    res.send(errors.noDataFound("No Classes are available for that course"));
+                }
+            }
+            else {
+                res.status(httpStatus.CONFLICT);
+                res.send(errors.unknownError(r.sqlMessage,r.errno));
+            }
+        });
+
+};
+
+
 // exports.addCourse=function (req,res) {
 //     if(!req.body.cid || !req.body.name ){
 //         res.status(httpStatus.BAD_REQUEST);
@@ -191,34 +238,34 @@ exports.addTeacher=function (req,res) {
 //         });
 // };
 
-// exports.addTeaches=function (req,res) {
-//     if(!req.body.cid || !req.body.name || !req.body.emailID){
-//         res.status(httpStatus.BAD_REQUEST);
-//         res.send(errors.badRequest("Some entries are empty!!"));
-//         return
-//     }
-//     services.insertTeaches(req.body.cid,req.body.name,req.body.emailID)
-//         .then(r=>{
-//             if(r===201){
-//                 res.status(httpStatus.CREATED);
-//                 res.send('Success');
-//             }
-//             else {
-//                 if (r.errno === 1062) {
-//                     res.status(httpStatus.CONFLICT);
-//                     res.send(errors.duplicateEntry(r.sqlMessage));
-//                 }
-//                 else if(r.errno === 1452){
-//                     res.status(httpStatus.BAD_REQUEST);
-//                     res.send(errors.foreignKey('No Such CID or Teacher Name'));
-//                 }
-//                 else {
-//                     res.status(httpStatus.CONFLICT);
-//                     res.send(errors.unknownError(r.sqlMessage,r.errno));
-//                 }
-//             }
-//         });
-// };
+exports.addTeaches=function (req,res) {
+    if(!req.body.cid){
+        res.status(httpStatus.BAD_REQUEST);
+        res.send(errors.badRequest("Some entries are empty!"));
+        return
+    }
+    services.insertTeaches(req.body.cid,req.body.details.name,req.body.details.emailID,req.body.details.college)
+        .then(r=>{
+            if(r===201){
+                res.status(httpStatus.CREATED);
+                res.send({status:'Success'});
+            }
+            else {
+                if (r.errno === 1062) {
+                    res.status(httpStatus.CONFLICT);
+                    res.send(errors.duplicateEntry(r.sqlMessage));
+                }
+                else if(r.errno === 1452){
+                    res.status(httpStatus.BAD_REQUEST);
+                    res.send(errors.foreignKey('No Such CID or Teacher Name'));
+                }
+                else {
+                    res.status(httpStatus.CONFLICT);
+                    res.send(errors.unknownError(r.sqlMessage,r.errno));
+                }
+            }
+        });
+};
 
 // exports.addChapters=function (req,res) {
 //     if(!req.body.name || !req.body.number || !req.body.cid){

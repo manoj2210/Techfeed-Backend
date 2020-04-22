@@ -8,6 +8,7 @@ const loginRouter=require('../routers/login');
 const middleware=require('../middleware/auth');
 const updateRouter=require('../routers/updatesRouter');
 const getDataRouter=require('../routers/getDataRouter');
+const announcementRouter=require('../routers/announcement');
 
 
 module.exports=function (app) {

@@ -19,7 +19,6 @@ MongoClient.connect(url, { useUnifiedTopology: true })
     .then(client => {
         console.log('Connected to Mongo Database');
         global.mongoDB=client.db(dbName);
-
         const app = express();
         urlMaps(app);
     });
