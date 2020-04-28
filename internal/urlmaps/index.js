@@ -24,5 +24,5 @@ module.exports=function (app) {
     app.use('/base',baseAddRouter);
     app.use('/getData',getDataRouter);
     app.use('/update',updateRouter);
-    app.listen(8080);
+    app.listen(process.env.PORT);
 };
