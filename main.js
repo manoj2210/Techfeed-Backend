@@ -13,12 +13,14 @@ const urlMaps=require('./internal/urlmaps');
 
 // Mongo
 const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb://localhost:27017";
+const uri = `mongodb+srv://techfeed:${process.env.mongoPassword}@freecluster-nmy3p.mongodb.net/test?retryWrites=true&w=majority`;
 const dbName = process.env.mongoDB;
-MongoClient.connect(url, { useUnifiedTopology: true })
+MongoClient.connect(uri, { useUnifiedTopology: true } )
     .then(client => {
         console.log('Connected to Mongo Database');
         global.mongoDB=client.db(dbName);
         const app = express();
+        app.get('/ping',(req,res)=>{res.send('pong')});
         urlMaps(app);
     });
+
