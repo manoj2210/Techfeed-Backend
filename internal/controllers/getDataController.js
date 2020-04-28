@@ -177,8 +177,8 @@ exports.getAnnouncements=function (req,res) {
                         res.send(resp);
 
                     } else {
-                        res.status(httpStatus.NOT_FOUND);
-                        res.send(errors.noDataFound("No Announcements are available"));
+                        res.status(httpStatus.OK);
+                        res.send(r);
                     }
                 } else {
                     res.status(httpStatus.CONFLICT);
