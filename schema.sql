@@ -1,8 +1,18 @@
 USE testDB;
 
-Create table College(Name varchar(50),City varchar(25),State varchar(25),PRIMARY KEY (Name));
+Create table College(
+    Name varchar(50),
+    City varchar(25),
+    State varchar(25),
+    PRIMARY KEY (Name)
+);
 
-Create table Department(Name varchar(50),ColName varchar(50),PRIMARY KEY (Name,ColName),FOREIGN KEY (ColName) REFERENCES College(Name));
+Create table Department(
+    Name varchar(50),
+    ColName varchar(50),
+    PRIMARY KEY (Name,ColName),
+    FOREIGN KEY (ColName) REFERENCES College(Name)
+);
 
 Create table Class(
     Name varchar(50),
