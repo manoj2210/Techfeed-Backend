@@ -40,8 +40,8 @@ Create table Students(
     RollNo varchar(10),
     Name varchar(50),
     MobileNo varchar(10),
-    IsRep bool,E
-    mailId varchar(50),
+    IsRep bool,
+    EmailId varchar(50),
     ClassName varchar(50),
     ColName varchar(50),
     DepName varchar(50),
@@ -89,7 +89,7 @@ create table Chapters(
 create table Materials(
     MatName varchar(100),
     ChapName varchar(50),
-    link varchar(300),
+    link varchar(1000),
     CID varchar(10),
     ColName varchar(50),
     Primary key(MatName,ChapName,CID,ColName),
@@ -116,10 +116,11 @@ create table AuthTeacher(
 CREATE TABLE Announcement (
     Name VARCHAR(50),
     EmailId VARCHAR(100),
-    Link VARCHAR(50),
+    Link VARCHAR(1000),
     ClassName VARCHAR(50),
     ColName VARCHAR(50),
     DepName VARCHAR(50),
+    primary key(Name,EmailId,Link,ClassName,ColName,DepName),
     FOREIGN KEY (Name , EmailID , ColName) REFERENCES Teachers (Name , EmailID , ColName),
     FOREIGN KEY (ClassName , DepName , ColName) REFERENCES Class (Name , DepName , ColName)
 );
