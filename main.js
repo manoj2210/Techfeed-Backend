@@ -13,7 +13,7 @@ const urlMaps=require('./internal/urlmaps');
 
 // Mongo
 const MongoClient = require('mongodb').MongoClient;
-const uri = `mongodb+srv://techfeed:${process.env.mongoPassword}@freecluster-nmy3p.mongodb.net/test?retryWrites=true&w=majority`;
+const uri = `mongodb://localhost:27017`;
 const dbName = process.env.mongoDB;
 MongoClient.connect(uri, { useUnifiedTopology: true } )
     .then(client => {

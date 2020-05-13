@@ -113,37 +113,6 @@ exports.addStudent=function (req,res) {
         });
 };
 
-
-
-// exports.addStudies=function (req,res) {
-//     if(!req.body.cid || !req.body.rollNo ){
-//         res.status(httpStatus.BAD_REQUEST);
-//         res.send(errors.badRequest("Some entries are empty!!"));
-//         return
-//     }
-//     services.insertStudies(req.body.cid,req.body.rollNo)
-//         .then(r=>{
-//             if(r===201){
-//                 res.status(httpStatus.CREATED);
-//                 res.send('Success');
-//             }
-//             else {
-//                 if (r.errno === 1062) {
-//                     res.status(httpStatus.CONFLICT);
-//                     res.send(errors.duplicateEntry(r.sqlMessage));
-//                 }
-//                 else if(r.errno === 1452){
-//                     res.status(httpStatus.BAD_REQUEST);
-//                     res.send(errors.foreignKey('No Such Student or Class'));
-//                 }
-//                 else {
-//                     res.status(httpStatus.CONFLICT);
-//                     res.send(errors.unknownError(r.sqlMessage,r.errno));
-//                 }
-//             }
-//         });
-// };
-
 exports.addTeacher=function (req,res) {
     if(!req.body.name || !req.body.mobileNo || !req.body.emailID || !req.body.collegeName ){
         res.status(httpStatus.BAD_REQUEST);
@@ -213,31 +182,6 @@ exports.addAnnouncement=function (req,res) {
 };
 
 
-// exports.addCourse=function (req,res) {
-//     if(!req.body.cid || !req.body.name ){
-//         res.status(httpStatus.BAD_REQUEST);
-//         res.send(errors.badRequest("Some entries are empty!!"));
-//         return
-//     }
-//     services.insertCourse(req.body.cid,req.body.name)
-//         .then(r=>{
-//             if(r===201){
-//                 res.status(httpStatus.CREATED);
-//                 res.send('Success');
-//             }
-//             else {
-//                 if (r.errno === 1062) {
-//                     res.status(httpStatus.CONFLICT);
-//                     res.send(errors.duplicateEntry(r.sqlMessage));
-//                 }
-//                 else {
-//                     res.status(httpStatus.CONFLICT);
-//                     res.send(errors.unknownError(r.sqlMessage,r.errno));
-//                 }
-//             }
-//         });
-// };
-
 exports.addTeaches=function (req,res) {
     if(!req.body.cid){
         res.status(httpStatus.BAD_REQUEST);
@@ -267,118 +211,69 @@ exports.addTeaches=function (req,res) {
         });
 };
 
-// exports.addChapters=function (req,res) {
-//     if(!req.body.name || !req.body.number || !req.body.cid){
-//         res.status(httpStatus.BAD_REQUEST);
-//         res.send(errors.badRequest("Some entries are empty!!"));
-//         return
-//     }
-//     services.insertChapters(req.body.name,req.body.number,req.body.cid)
-//         .then(r=>{
-//             if(r===201){
-//                 res.status(httpStatus.CREATED);
-//                 res.send('Success');
-//             }
-//             else {
-//                 if (r.errno === 1062) {
-//                     res.status(httpStatus.CONFLICT);
-//                     res.send(errors.duplicateEntry(r.sqlMessage));
-//                 }
-//                 else if(r.errno === 1452){
-//                     res.status(httpStatus.BAD_REQUEST);
-//                     res.send(errors.foreignKey('No Such CID'));
-//                 }
-//                 else {
-//                     res.status(httpStatus.CONFLICT);
-//                     res.send(errors.unknownError(r.sqlMessage,r.errno));
-//                 }
-//             }
-//         });
-// };
-
-// exports.addMaterials=function (req,res) {
-//     if(!req.body.matName || !req.body.chapName || !req.body.link){
-//         res.status(httpStatus.BAD_REQUEST);
-//         res.send(errors.badRequest("Some entries are empty!!"));
-//         return
-//     }
-//     services.insertMaterials(req.body.matName,req.body.chapName,req.body.link)
-//         .then(r=>{
-//             if(r===201){
-//                 res.status(httpStatus.CREATED);
-//                 res.send('Success');
-//             }
-//             else {
-//                 if (r.errno === 1062) {
-//                     res.status(httpStatus.CONFLICT);
-//                     res.send(errors.duplicateEntry(r.sqlMessage));
-//                 }
-//                 else if(r.errno === 1452){
-//                     res.status(httpStatus.BAD_REQUEST);
-//                     res.send(errors.foreignKey('No Such Chapter'));
-//                 }
-//                 else {
-//                     res.status(httpStatus.CONFLICT);
-//                     res.send(errors.unknownError(r.sqlMessage,r.errno));
-//                 }
-//             }
-//         });
-// };
-
-// exports.addExam=function (req,res) {
-//     if(!req.body.date || !req.body.cid || !req.body.className){
-//         res.status(httpStatus.BAD_REQUEST);
-//         res.send(errors.badRequest("Some entries are empty!!"));
-//         return
-//     }
-//     services.insertExam(req.body.date,req.body.cid,req.body.className)
-//         .then(r=>{
-//             if(r===201){
-//                 res.status(httpStatus.CREATED);
-//                 res.send('Success');
-//             }
-//             else {
-//                 if (r.errno === 1062) {
-//                     res.status(httpStatus.CONFLICT);
-//                     res.send(errors.duplicateEntry(r.sqlMessage));
-//                 }
-//                 else if(r.errno === 1452){
-//                     res.status(httpStatus.BAD_REQUEST);
-//                     res.send(errors.foreignKey('No Such CID or Class Name'));
-//                 }
-//                 else {
-//                     res.status(httpStatus.CONFLICT);
-//                     res.send(errors.unknownError(r.sqlMessage,r.errno));
-//                 }
-//             }
-//         });
-// };
-
-// exports.addTests=function (req,res) {
-//     if(!req.body.date || !req.body.cid || !req.body.className){
-//         res.status(httpStatus.BAD_REQUEST);
-//         res.send(errors.badRequest("Some entries are empty!!"));
-//         return
-//     }
-//     services.insertTest(req.body.date,req.body.cid,req.body.className)
-//         .then(r=>{
-//             if(r===201){
-//                 res.status(httpStatus.CREATED);
-//                 res.send('Success');
-//             }
-//             else {
-//                 if (r.errno === 1062) {
-//                     res.status(httpStatus.CONFLICT);
-//                     res.send(errors.duplicateEntry(r.sqlMessage));
-//                 }
-//                 else if(r.errno === 1452){
-//                     res.status(httpStatus.BAD_REQUEST);
-//                     res.send(errors.foreignKey('No Such CID or Class'));
-//                 }
-//                 else {
-//                     res.status(httpStatus.CONFLICT);
-//                     res.send(errors.unknownError(r.sqlMessage,r.errno));
-//                 }
-//             }
-//         });
-// };
+exports.addMaterial=function (req,res) {
+    if(!req.body.cid,!req.body.co,!req.body.link,!req.body.matName,!req.body.chapName){
+        res.status(httpStatus.BAD_REQUEST);
+        res.send(errors.badRequest("Some entries are empty!"));
+        return
+    }
+    services.insertChapter(req.body.chapName,req.body.co,req.body.cid,req.body.details.college)
+        .then(r=>{
+            if(r===201){
+                services.insertMaterial(req.body.matName,req.body.chapName,req.body.link,req.body.cid,req.body.details.college)
+                    .then(re=>{
+                        if(re===201){
+                            res.status(httpStatus.CREATED);
+                            res.send({status:'Success'});
+                        }
+                        else {
+                            if (re.errno === 1062) {
+                                res.status(httpStatus.CONFLICT);
+                                res.send(errors.duplicateEntry(re.sqlMessage));
+                            }
+                            else if(re.errno === 1452){
+                                res.status(httpStatus.BAD_REQUEST);
+                                res.send(errors.foreignKey('No Such Chapter'));
+                            }
+                            else {
+                                res.status(httpStatus.CONFLICT);
+                                res.send(errors.unknownError(re.sqlMessage,re.errno));
+                            }
+                        }
+                    });
+            }
+            else {
+                if (r.errno === 1062) {
+                    services.insertMaterial(req.body.matName,req.body.chapName,req.body.link,req.body.cid,req.body.details.college)
+                        .then(re=>{
+                            if(re===201){
+                                res.status(httpStatus.CREATED);
+                                res.send({status:'Success'});
+                            }
+                            else {
+                                if (re.errno === 1062) {
+                                    res.status(httpStatus.CONFLICT);
+                                    res.send(errors.duplicateEntry(re.sqlMessage));
+                                }
+                                else if(re.errno === 1452){
+                                    res.status(httpStatus.BAD_REQUEST);
+                                    res.send(errors.foreignKey('No Such Chapter'));
+                                }
+                                else {
+                                    res.status(httpStatus.CONFLICT);
+                                    res.send(errors.unknownError(re.sqlMessage,re.errno));
+                                }
+                            }
+                        });
+                }
+                else if(r.errno === 1452){
+                        res.status(httpStatus.BAD_REQUEST);
+                        res.send(errors.foreignKey('No Such Course'));
+                    }
+                else {
+                    res.status(httpStatus.CONFLICT);
+                    res.send(errors.unknownError(r.sqlMessage,r.errno));
+                }
+            }
+        });
+}

@@ -8,7 +8,6 @@ const loginRouter=require('../routers/login');
 const middleware=require('../middleware/auth');
 const updateRouter=require('../routers/updatesRouter');
 const getDataRouter=require('../routers/getDataRouter');
-const announcementRouter=require('../routers/announcement');
 
 
 module.exports=function (app) {
@@ -24,5 +23,6 @@ module.exports=function (app) {
     app.use('/base',baseAddRouter);
     app.use('/getData',getDataRouter);
     app.use('/update',updateRouter);
+    console.log("Listening at"+ process.env.PORT);
     app.listen(process.env.PORT);
 };

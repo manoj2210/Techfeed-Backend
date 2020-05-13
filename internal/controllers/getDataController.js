@@ -72,14 +72,8 @@ exports.getChaptersStudent=function (req,res) {
     getStudentChapters(req.body.cid,req.body.details.college)
         .then(r=>{
             if(!r.code){
-                if(r.length>0) {
-                    res.status(httpStatus.OK);
-                    res.send(r);
-                }
-                else{
-                    res.status(httpStatus.NOT_FOUND);
-                    res.send(errors.noDataFound("No Chapters are available"));
-                }
+                res.status(httpStatus.OK);
+                res.send(r);
             }
             else {
                 res.status(httpStatus.CONFLICT);
@@ -97,14 +91,8 @@ exports.getMaterialsStudent=function (req,res) {
     getStudentMaterials(req.body.cid,req.body.details.college,req.body.chapter)
         .then(r=>{
             if(!r.code){
-                if(r.length>0) {
-                    res.status(httpStatus.OK);
-                    res.send(r);
-                }
-                else{
-                    res.status(httpStatus.NOT_FOUND);
-                    res.send(errors.noDataFound("No Materials are available"));
-                }
+                res.status(httpStatus.OK);
+                res.send(r);
             }
             else {
                 res.status(httpStatus.CONFLICT);

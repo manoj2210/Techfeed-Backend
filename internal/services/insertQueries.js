@@ -125,6 +125,30 @@ exports.insertTeaches=function (c,n,e,colName) {
         });
 };
 
+exports.insertChapter=function (name,number,cid,colName) {
+    return db.query(`INSERT INTO Chapters (Name,Number,CID,ColName) VALUES ('${name}',${number},'${cid}','${colName}');`)
+        .then(rows=>{
+            return 201;
+        },err => {
+            return errorTemplate(err.code,err.errno,err.sqlMessage);
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+}
+
+exports.insertMaterial=function (matName,chapName,link,cid,colName) {
+    return db.query(`INSERT INTO Materials (MatName,ChapName,Link,CID,ColName) VALUES ('${matName}','${chapName}','${link}','${cid}','${colName}');`)
+        .then(rows=>{
+            return 201;
+        },err => {
+            return errorTemplate(err.code,err.errno,err.sqlMessage);
+        })
+        .catch(err=>{
+            console.log(err);
+        });
+}
+
 // exports.insertCourse=function (c,n) {
 //     return db.query(`INSERT INTO \`Course\` (\`CID\`,\`Name\`) VALUES ('${c}', '${n}');`)
 //         .then(rows=>{
